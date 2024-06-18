@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Access Control</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background-color: #f2f2f2; padding: 20px; }
+        h1 { color: #333; margin-bottom: 30px; }
+        .button-container { display: flex; justify-content: center; }
+        .button { background-color: #4CAF50; border: none; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px; cursor: pointer; border-radius: 12px; flex: 1; max-width: 150px; }
+        .button-off { background-color: #f44336; }
+    </style>
+</head>
+<body>
+    <h1>Abu Dhabi Villa K-81 Door Control</h1>
+    <div class="button-container">
+        <button class="button" onclick="sendAction('OPEN')">Open Door</button>
+        <button class="button button-off" onclick="sendAction('CLOSE')">Close Door</button>
+    </div>
+    <script>
+        function sendAction(action) {
+            fetch('/control', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ action })
+            })
+            .then(response => response.text())
+            .then(data => alert(data))
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
+
